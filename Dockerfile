@@ -28,4 +28,4 @@ COPY . /app
 
 WORKDIR /app
 
-CMD ["bash", "serve.sh"]
+CMD ["bash", "bin/serve.sh"]
