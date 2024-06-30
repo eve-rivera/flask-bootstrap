@@ -3,3 +3,6 @@ build:
 
 up: build
 	docker-compose up --force-recreate
+
+bash:
+	docker-compose run -it app bash
