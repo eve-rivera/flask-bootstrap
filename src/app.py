@@ -1,9 +1,6 @@
 from flask import Flask, render_template
-from sqlalchemy import select
-from sqlalchemy.orm import session
 
-from models import User
-from db import get_session
+from services import UserService
 
 app = Flask(
     __name__,
@@ -13,15 +10,13 @@ app = Flask(
 )
 
 
-@app.route("/clicked", methods=['GET', 'POST'])
+@app.route('/clicked', methods=['GET', 'POST'])
 def clicked():
-    response = ""
-
-    with get_session() as session:
-        users = session.execute(select(User).order_by(User.id))
-        for user in users.all():
-            response += user.__repr__()
-            response += "<br />"
+    users = UserService.get_all_users()
+    users_repr = [
+        user.__repr__() for user in users
+    ]
+    response = '<br />'.join(users_repr)
 
     return response
 

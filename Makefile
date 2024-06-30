@@ -2,7 +2,7 @@ build:
 	docker build -t flask-bootstrap:local .
 
 up: build
-	docker-compose up --force-recreate
+	docker-compose up -d
 
 bash: up
 	docker-compose exec -it app bash
@@ -16,5 +16,8 @@ migrate:
 new-migration:
 	docker-compose exec -it app alembic revision -m $(shell bash -c 'read -p "Enter migration name: " name; echo $$name')
 
-tests-e2e: up
+test-unit:
+	docker-compose run -it app bash bin/test_unit.sh
+
+test-e2e: up
 	docker-compose exec -it app bash bin/test_e2e.sh
