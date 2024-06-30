@@ -1,4 +1,9 @@
 from flask import Flask, render_template
+from sqlalchemy import select
+from sqlalchemy.orm import session
+
+from models import User
+from db import get_session
 
 app = Flask(
     __name__,
@@ -10,7 +15,15 @@ app = Flask(
 
 @app.route("/clicked", methods=['GET', 'POST'])
 def clicked():
-    return "This works!"
+    response = ""
+
+    with get_session() as session:
+        users = session.execute(select(User).order_by(User.id))
+        for user in users.all():
+            response += user.__repr__()
+            response += "<br />"
+
+    return response
 
 
 @app.route("/")
