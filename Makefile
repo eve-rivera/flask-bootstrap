@@ -5,4 +5,7 @@ up: build
 	docker-compose up --force-recreate
 
 bash:
-	docker-compose run -it app bash
+	docker-compose exec -it app bash
+
+psql:
+	docker-compose exec -it db psql -U example -d example
