@@ -8,6 +8,11 @@ app = Flask(
 )
 
 
+@app.route("/clicked", methods=['GET', 'POST'])
+def clicked():
+    return "This works!"
+
+
 @app.route("/")
 def root_path():
     return render_template("index.html")
