@@ -9,3 +9,6 @@ bash:
 
 psql:
 	docker-compose exec -it db psql -U example -d example
+
+tests-e2e:
+	docker-compose exec -it app bash test_e2e.sh
