@@ -14,6 +14,7 @@
 
 #### Testing
 - `make tests-e2e` - Runs Playwright tests and opens HTML report
+- `make test-unit` - Runs `unittest` test cases from src/tests
 
 ### Credentials
 Default database credentials and the database name is `example`
